@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="__CDN__/assets/js/frontend/baidu.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$config['title']}</title>
+    <meta name="description" content="惠创知识产权-提供商标免费查询、商标注册、商标转让、版权登记、专利申请、贯标、电商、高新企业认证、科技项目申报管理、增值电信理等服务!">
+    <meta name="keywords" content="商标注册，商标转让，版权登记，专利申请，3A认证，工商注册，企业注册，法人变更，变更增值电信，ICP，EDI，SP，IDC，IP-VPN，ISP，CDN，固定网国内数据传送业务">
+    <link rel="shortcut icon" href="/assets/img/web/title_logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/libs/jquery-ui/jquery-ui.css" />
+    <script src="__CDN__/assets/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="__CDN__/assets/libs/jquery-ui/jquery-ui.js"></script>
+    <script src="__CDN__/assets/js/frontend/web/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/web/list_tel.css?v=12121" />
+</head>
+<body>
+    <div class="article-wrap">
+        <div class="article-wrap-head">
+            <span class="return" id="return">
+                <img src="/assets/img/web/return.png">
+            </span>
+            <span>文章列表</span>
+        </div>
+        <div class="article-wrap-title">
+            <div class="article-wrap-title-content">
+                <div class="article-wrap-title-content-left logo_index">
+                    <img src="/assets/img/web/title_logo_new.png"  alt="">
+                </div>
+                <div class="article-wrap-title-content-right">
+                    <div class="article-wrap-title-content-right-desc">咨询热线</div>
+                    <div class="article-wrap-title-content-right-tel">{$config.tel}</div>
+                </div>
+            </div>
+        </div>
+        <div class="article-wrap-banner">
+            <img style="width: 100%" src='/assets/img/web/banner.png' alt="">
+        </div>
+        <div class="article-wrap-bread">
+            <span><a href="#">首页</a> > 文章列表</span>
+        </div>
+        <div class="article-wrap-content">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#fragment-1">公司并购</a></li>
+                    <li><a href="#fragment-2">商标注册</a></li>
+                    <li><a href="#fragment-3">增值电信许可证</a></li>
+                    <li><a href="#fragment-4">知识产权</a></li>
+                </ul>
+                <ul id="fragment-1">
+                    {if condition="!empty($answer['contentList']['gongsi_answer'])"}
+                    {foreach name="answer['contentList']['gongsi_answer']" item="gongsi"}
+                    <li>
+                        <div class="title" data-id="{$gongsi.id}">
+                            <span>{$gongsi.name|mb_substr=0,40}</span>
+                            <span>{$gongsi.updatetime|date="Y-m-d",###}</span>
+                        </div>
+                        <div>
+                            <span>{$gongsi.description|mb_substr=0,10}...</span>
+                            <span><a href="/index/index/article.html?id={$gongsi.id}">查看更多</a></span>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-2">
+                    {if condition="!empty($answer['contentList']['shangbiao_answer'])"}
+                    {foreach name="answer['contentList']['shangbiao_answer']" item="shangbiao"}
+                        <li>
+                            <div>
+                                <span>{$shangbiao.name|mb_substr=0,10}</span>
+                                <span>{$shangbiao.updatetime|date="Y-m-d",###}</span>
+                            </div>
+                            <div>
+                                <span>{$shangbiao.description|mb_substr=0,10}...</span>
+                                <span><a href="/index/index/article.html?id={$shangbiao.id}">查看更多</a></span>
+                            </div>
+                        </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-3">
+                    {if condition="!empty($answer['contentList']['zengzhi_answer'])"}
+                    {foreach name="answer['contentList']['zengzhi_answer']" item="zengzhi"}
+                    <li>
+                        <div>
+                            <span>{$zengzhi.name|mb_substr=0,10}</span>
+                            <span>{$zengzhi.updatetime|date="Y-m-d",###}</span>
+                        </div>
+                        <div>
+                            <span>{$zengzhi.description|mb_substr=0,10}...</span>
+                            <span><a href="/index/index/article.html?id={$zengzhi.id}">查看更多</a></span>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-4">
+                    {if condition="!empty($answer['contentList']['zhishi_answer'])"}
+                    {foreach name="answer['contentList']['zhishi_answer']" item="zhishi"}
+                    <li>
+                        <div>
+                            <span>{$zhishi.name|mb_substr=0,10}</span>
+                            <span>{$zhishi.updatetime|date="Y-m-d",###}</span>
+                        </div>
+                        <div>
+                            <span>{$zhishi.description|mb_substr=0,10}...</span>
+                            <span><a href="/index/index/article.html?id={$zhishi.id}">查看更多</a></span>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+            </div>
+            
+        </div>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-content-left">
+                    <h3>{$config.corporate_name}</h3>
+                    <p>公司地址：{$config.address}</p>
+                    <p>{$config.icp}</p>
+                </div>
+                <div class="footer-content-right">
+                    <div class="web weibo"><img style="width: 48px;height: 48px" src="/assets/img/web/weibo.png" alt=""></div>
+                    <div class="qq" data-qq="{$config.indexqq}"><img style="width: 48px;height: 48px" src="/assets/img/web/qq.png" alt=""></div>
+                    <div class="wx"><img src="{$config.qrcode}" style="width: 158px;height: 158px" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="extra-box">
+        <div class="extra-box-item">
+            <div class="img">
+                <img src="/assets/img/web/wx_tel.png">
+            </div>
+            <span id="serve"><a title="">咨询</a></span>
+        </div>
+        <div class="extra-box-item">
+            <div class="img"></div>
+            <span id="tel"><a title="">电话</a></span>
+        </div>
+        <div class="extra-box-item">
+            <div class="img"></div>
+            <span id="mini"><a title="">二维码</a></span>
+        </div>
+        <div class="extra-box-item" id="scroll-top">
+            <div class="img"></div>
+            <span>置顶</span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(".logo_index").click(function(){
+        window.location.href="/index/index/index";
+    });
+    $('#return').click(function () {
+        window.history.back(-1);
+    })
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+    let wxappid = '{$wxConfig["appid"]}'
+    let wxnoncestr = '{$wxConfig["noncestr"]}'
+    let wxtimestamp = '{$wxConfig["timestamp"]}'
+    let wxsignatrue = '{$wxConfig["signatrue"]}'
+    let shareUrl = '{$wxConfig["shareUrl"]}'
+    let wxtitle = '{$config["title"]}';
+    let logo = '{$config["share_img"]}';
+    console.log(logo);
+    console.log(shareUrl);
+    // alert(wxappid);
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: wxappid, // 必填，公众号的唯一标识
+        timestamp: wxtimestamp, // 必填，生成签名的时间戳
+        nonceStr: wxnoncestr, // 必填，生成签名的随机串
+        signature: wxsignatrue,// 必填，签名
+        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage','onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表
+    });
+
+    wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+        wx.onMenuShareTimeline({
+            title: wxtitle, // 分享标题
+            link: shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: logo, // 分享图标
+            success: function () {
+                // 用户点击了分享后执行的回调函数
+            }
+        })
+    });
+    // wx.updateTimelineShareData({
+    //     title: wxtitle, // 分享标题
+    //     link: shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //     imgUrl: logo, // 分享图标
+    //     success: function () {
+    //         // 设置成功
+    //         alert('成功')
+    //     }
+    // });
+</script>

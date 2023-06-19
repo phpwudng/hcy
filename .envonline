@@ -1,0 +1,16 @@
+[app]
+debug = true
+trace = false
+
+[database]
+hostname = 127.0.0.1
+database = hcy
+username = hcyweb
+password = 508bb7d30a9891eb
+hostport = 3306
+prefix = hcy_
+
+[redis]
+ip="192.168.0.105"
+port=16380"
+password="mini"

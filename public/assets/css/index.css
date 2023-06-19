@@ -1,0 +1,49 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    background-color:#EEF2F7;
+    padding: 0;
+    margin:0;
+}
+.title{
+    border:1px solid blue;
+    height: 106px;
+}
+.top_image{
+    height: 458px;
+    border:1px solid grey;
+}
+.service{
+    height: 648px;
+    margin-top: 20px;
+    border:1px solid red;
+}
+.service_list{
+    width: 60.6%;
+    height: 162px;
+    padding: 12px;
+    margin-left: 18.18%;
+    border:1px solid grey;
+    position: absolute;
+
+}
+.service_list div{
+    float: left;
+}
+.service_list .service_left{
+    height: 138px;
+    width: 15.333%;
+    border: 1px solid red;
+}
+.service_list .service_main{
+    height: 138px;
+    width: 84.6666%;
+    border: 1px solid #F012BE;
+}
+.service_main ul{
+
+}
+.service_main ul li{
+    list-style-type: none;
+}

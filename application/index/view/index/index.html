@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="__CDN__/assets/js/frontend/baidu.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="惠创知识产权-提供商标免费查询、商标注册、商标转让、版权登记、专利申请、贯标、电商、高新企业认证、科技项目申报管理、增值电信理等服务!">
+    <meta name="keywords" content="商标注册，商标转让，版权登记，专利申请，3A认证，工商注册，企业注册，法人变更，变更增值电信，ICP，EDI，SP，IDC，IP-VPN，ISP，CDN，固定网国内数据传送业务">
+    <title>{$config['title']}</title>
+    <link rel="shortcut icon" href="/assets/img/web/title_logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/libs/jquery-ui/jquery-ui.css" />
+    <script src="__CDN__/assets/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="__CDN__/assets/libs/jquery-ui/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/web/index.css?v=12121" />
+    <link rel="stylesheet" href="__CDN__/assets/libs/swiper/package/css/swiper.min.css">
+    <script src="__CDN__/assets/libs/swiper/package/js/swiper.min.js"></script>
+
+    <script src="__CDN__/assets/js/frontend/web/index.js"></script>
+    {include file="common/web/baidu" /}
+</head>
+<style>
+    a{
+        text-decoration: none;
+        color: inherit;
+
+    }
+    .qq{
+        cursor:pointer;
+    }
+    .example-el{
+        width: 138px;
+        height: 13px;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+        margin: 80px 0 16px;
+    }
+    .example-name{
+        width: 104px;
+        height: 26px;
+        font-size: 1.17em;
+        font-weight: bold;
+        color: #FFFFFF;
+        text-align: center;
+        margin: 10px 0 15px;
+    }
+    .logo{
+        cursor: pointer;
+    }
+</style>
+<script>
+    $(document).on('click','.logo',function (){
+        window.location.href="/index/index/index.html"
+    })
+</script>
+<body>
+<!--<img class="logo img" src="http://www.hcytm.com/logo.jpg" alt="图片" width="0" height="0" style="padding: 0px;margin: 0px" />-->
+<div class="index-wrap">
+    <div class="index-wrap-title">
+        <div class="index-wrap-title-content">
+            <div class="index-wrap-title-content-left logo" style="width:225px">
+                <img src="/assets/img/web/title_logo_new.png" style="height:52px;width: 176px;" alt="">
+<!--                <div style="float: right;width:175px;height:50px;text-align: center;font-weight: bold;font-size:18px;color: #292662bd" >-->
+<!--                    惠创知产<br/> <div style="padding-top:5px">www.hcytm.com</div>-->
+<!--                </div>-->
+            </div>
+            <div class="index-wrap-title-content-right">
+                <div class="index-wrap-title-content-right-desc" style="font-weight: bold;color: #676767">咨询热线:&nbsp&nbsp</div>
+                <div class="index-wrap-title-content-right-tel" style="color: blue">{$config.tel}</div>
+            </div>
+        </div>
+    </div>
+    <div class="index-wrap-banner"><img style="height: 458px;width: 100%" src='/assets/img/web/banner.png' alt=""></div>
+        <div class="index-wrap-list">
+            <div class="index-wrap-list-item">
+                <div class="index-wrap-list-item-left tel-info">
+                    <h3>增值电信</h3>
+                    <h4>Value ADDED</h4>
+                    <img src="/assets/img/web/zengzhi.png" alt="">
+                </div>
+                <div class="index-wrap-list-item-right">
+                    <div class="swiper-container contain1">
+                        <div class="swiper-wrapper">
+                            {if condition="! empty($service['contentList']['zengzhi'])"}
+                            {foreach name="service['contentList']['zengzhi']" item="zz"}
+                            <div class="swiper-slide qq" data-qq="{$zz.qq}">
+                                <img src="{$zz.image}" alt="">
+                                <div>
+                                    <h3>{$zz.name}</h3>
+                                    <p>{$zz.description}</p>
+                                </div>
+                            </div>
+                            {/foreach}
+                            {/if}
+                        </div>
+                        <div class="index-wrap-list-item-right-left-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                        <div class="index-wrap-list-item-right-right-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-wrap-list-item">
+                <div class="index-wrap-list-item-left service-certification">
+                    <h3>认证服务</h3>
+                    <h4>AUTHENTICATION</h4>
+                    <img src="/assets/img/web/fuwu.png" alt="">
+
+                </div>
+                <div class="index-wrap-list-item-right">
+                    <div class="swiper-container contain1">
+                        <div class="swiper-wrapper">
+                            {if condition="! empty($service['contentList']['renzheng'])"}
+                            {foreach name="service['contentList']['renzheng']" item="rz"}
+                            <div class="swiper-slide qq" data-qq="{$rz.qq}">
+                                <img src="{$rz.image}" alt="">
+                                <div>
+                                    <h3>{$rz.name}</h3>
+                                    <p>{$rz.description}</p>
+                                </div>
+                            </div>
+                            {/foreach}
+                            {/if}
+                        </div>
+                        <div class="index-wrap-list-item-right-left-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                        <div class="index-wrap-list-item-right-right-icon">
+                            <span class="ui-icon "></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-wrap-list-item">
+                <div class="index-wrap-list-item-left intellectual-rights">
+                    <h3>知识产权</h3>
+                    <h4>KNOWLEDGE</h4>
+                    <img src="/assets/img/web/zhishi.png" alt="">
+                </div>
+                <div class="index-wrap-list-item-right">
+                    <div class="swiper-container contain1">
+                        <div class="swiper-wrapper">
+                            {if condition="! empty($service['contentList']['zhishi'])"}
+                            {foreach name="service['contentList']['zhishi']" item="zhishi"}
+                            <div class="swiper-slide qq" data-qq="{$zhishi.qq}">
+                                <img src="{$zhishi.image}" alt="">
+                                <div>
+                                    <h3>{$zhishi.name}</h3>
+                                    <p>{$zhishi.description}</p>
+                                </div>
+                            </div>
+                            {/foreach}
+                            {/if}
+                        </div>
+                        <div class="index-wrap-list-item-right-left-icon">
+                            <span class="ui-icon "></span>
+                        </div>
+                        <div class="index-wrap-list-item-right-right-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="index-wrap-list-item">
+                <div class="index-wrap-list-item-left industrial-service">
+                    <h3>工商服务</h3>
+                    <h4>BUSINESS CIRCLES</h4>
+                    <img src="/assets/img/web/gongshang.png" alt="">
+                </div>
+                <div class="index-wrap-list-item-right">
+                    <div class="swiper-container contain1">
+                        <div class="swiper-wrapper">
+                            {if condition="! empty($service['contentList']['gongshang'])"}
+                            {foreach name="service['contentList']['gongshang']" item="gongs"}
+                            <div class="swiper-slide qq" data-qq="{$gongs.qq}">
+                                <img src="{$gongs.image}" alt="">
+                                <div>
+                                    <h3>{$gongs.name}</h3>
+                                    <p>{$gongs.description}</p>
+                                </div>
+                            </div>
+                            {/foreach}
+                            {/if}
+                        </div>
+                        <div class="index-wrap-list-item-right-left-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                        <div class="index-wrap-list-item-right-right-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="static-example">
+            <h3>咨询顾问</h3>
+            <span>专业顾问，一对一免费服务</span>
+        </div>
+        <div class="static-ask-content">
+            <div class="static-ask-content-top"></div>
+            <div class="static-ask-content-bottom">
+                <div class="wrap">
+                    <div class="swiper-container contain1">
+                        <div class="swiper-wrapper people-wrapper">
+                            {foreach name="adviser" item="vo"}
+                            <div class="swiper-slide qq"  data-qq="{$vo.qq}">
+                                <div class="img" style="background-image:url('{$vo.image}')"></div>
+                                <div class="desc">
+                                    <h3>{$vo.name}</h3>
+                                    <p style="font-size: 0.9em">{$vo.description}</p>
+                                    <div class="btn" data-num="{$vo.qq}">立即咨询</div>
+                                </div>
+                            </div>
+                            {/foreach}
+                        </div>
+                        <div class="index-wrap-list-item-right-left-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                        <div class="index-wrap-list-item-right-right-icon">
+                            <span class="ui-icon"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="static-example">
+            <h3>经典案例</h3>
+            <span>成功企业典范</span>
+        </div>
+        <div class="static-example-content">
+            <div class="static-example-content-wrap">
+                <div class="left" style="background-image:url('/assets/img/web/caseleft.png')">
+                    <div class="example-el">VALUE ADDED</div>
+                    <div class="example-name">经典案例</div>
+                </div>
+                <div class="right">
+                    {foreach name="successCase" item="val"}
+                    <div class="right-item">
+                        <img src="{$val.image}" alt="">
+                    </div>
+                    {/foreach}
+                </div>
+            </div>
+        </div>
+        <div class="static-example">
+            <h3>问题答疑专栏</h3>
+            <span>专业人士,为您解答</span>
+        </div>
+        <div class="problem">
+            <div class="problem-item">
+                <div class="problem-item-top">
+                    <div class="problem-item-top-left">
+                        <span class="ui-icon ui-icon-triangle-1-e"></span>
+                        <span>公司并购疑难</span>
+                    </div>
+                    <div class="problem-item-top-right"><a href="/index/index/list#fragment-1" target="_blank">查看更多</a></div>
+                </div>
+                <div class="problem-item-bottom">
+                    <ul>
+                        {if condition="!empty($answer['contentList']['gongsi_answer'])"}
+                        {foreach name="answer['contentList']['gongsi_answer']" item="gongsi"}
+                        <li>
+                            <a class="answer_name" href="/index/index/article.html?id={$gongsi.id}" target="_blank">{$gongsi.name|mb_substr=0,16}</a>
+                        </li>
+                        {/foreach}
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+            <div class="problem-item">
+                <div class="problem-item-top">
+                    <div class="problem-item-top-left">
+                        <span class="ui-icon ui-icon-triangle-1-e"></span>
+                        <span>商标注册疑难</span>
+                    </div>
+                    <div class="problem-item-top-right"><a href="/index/index/list#fragment-2" target="_blank">查看更多</a></div>
+                </div>
+                <div class="problem-item-bottom">
+                    <ul>
+                        {if condition="!empty($answer['contentList']['shangbiao_answer'])"}
+                        {foreach name="answer['contentList']['shangbiao_answer']" item="shangbiao"}
+                        <li>
+                            <a class="answer_name" href="/index/index/article.html?id={$shangbiao.id}" target="_blank">{$shangbiao.name|mb_substr=0,16}</a>
+                        </li>
+                        {/foreach}
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+            <div class="problem-item">
+                <div class="problem-item-top">
+                    <div class="problem-item-top-left">
+                        <span class="ui-icon ui-icon-triangle-1-e"></span>
+                        <span>增值电信许可证疑难</span>
+                    </div>
+                    <div class="problem-item-top-right"><a href="/index/index/list#fragment-3" target="_blank">查看更多</a></div>
+                </div>
+                <div class="problem-item-bottom">
+                    <ul>
+                        {if condition="!empty($answer['contentList']['zengzhi_answer'])"}
+                        {foreach name="answer['contentList']['zengzhi_answer']" item="zengzhi"}
+                        <li>
+                            <a class="answer_name" href="/index/index/article.html?id={$zengzhi.id}" target="_blank">{$zengzhi.name|mb_substr=0,16}</a>
+                        </li>
+                        {/foreach}
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+            <div class="problem-item">
+                <div class="problem-item-top">
+                    <div class="problem-item-top-left">
+                        <span class="ui-icon ui-icon-triangle-1-e"></span>
+                        <span>知识产权疑难</span>
+                    </div>
+                    <div class="problem-item-top-right"><a href="/index/index/list.html#fragment-4">查看更多</a></div>
+                </div>
+                <div class="problem-item-bottom">
+                    <ul>
+                        {if condition="!empty($answer['contentList']['zhishi_answer'])"}
+                        {foreach name="answer['contentList']['zhishi_answer']" item="zhishi"}
+                        <li>
+                            <a class="answer_name" href="/index/index/article.html?id={$zhishi.id}" target="_blank">{$zhishi.name|mb_substr=0,16}</a>
+                        </li>
+                        {/foreach}
+                        {/if}
+                    </ul>
+                </div>
+            </div>
+        </div>
+{include file="common/web/footer" /}

@@ -1,0 +1,97 @@
+<div class="footer">
+    <div class="footer-content">
+        <div class="footer-content-left">
+            <h3>{$config.corporate_name}</h3>
+            <p>公司地址：{$config.address}</p>
+            <p><a href="{$config.icp_url}" target="_blank">{$config.icp}</a></p>
+        </div>
+        <div class="footer-content-right">
+            <div class="web weibo"><img style="width: 48px;height: 48px" src="/assets/img/web/weibo.png" alt=""></div>
+            <div class="qq" data-qq="{$config.indexqq}"><img style="width: 48px;height: 48px" src="/assets/img/web/qq.png" alt=""></div>
+            <div class="wx"><img src="{$config.qrcode}" style="width: 158px;height: 158px" alt=""></div>
+        </div>
+    </div>
+</div>
+<a href="" target="_blank"></a>
+</div>
+<div class="extra-box">
+    <a herf="javascript:;" id="serve">
+        <div class="extra-box-item" data-qq="{$config.indexqq}" onclick="goqq({$config.indexqq})">
+            <div class="img"><img src="/assets/img/web/kefu_h5.png" alt=""></div>
+            <span >客服</span>
+        </div>
+    </a>
+    <a title="" href="javascript:;" id="tel">
+        <div  class="extra-box-item">
+                <div class="img"><img style="width: 30px;margin: 0 auto 10px;height: 30px;padding: 0;" src="/assets/img/web/tel_h5.png" alt=""></div>
+            <span >电话</span>
+        </div>
+    </a>
+    <a title="" href="javascript:;" id="mini">
+        <div  class="extra-box-item">
+            <div class="img"><img style="width: 30px;margin: 0 auto 10px;height: 30px;padding: 0;" src="/assets/img/web/qr_h5_1.png" alt=""></div>
+            <span >二维码</span>
+        </div>
+    </a>
+    <a title="" href="javascript:;" class="extra-box-item" style="display: none" id="scroll-top">
+        <div >
+            <div class="img" style="background:none" ><img style="width: 29px;height: 29px" src="/assets/img/web/top_h5.png" alt=""></div>
+            <span>置顶</span>
+        </div>
+    </a>
+
+</div>
+</body>
+</html>
+<script>
+    $(".weibo").click(function(){
+        window.open("https://weibo.com/huichuangyenet");
+    });
+    $(document).on("click", ".qq",function () {
+        let qqnum = $(this).data('qq');
+        console.log(qqnum);
+        window.location.href="tencent://message/?uin="+qqnum+"&Site=Sambow&Menu=yes";
+    })
+    function goqq(qqnum){
+        window.location.href="tencent://message/?uin="+qqnum+"&Site=http://vps.shuidazhe.com&Menu=yes";
+    }
+    $( "#tabs" ).tabs({
+        collapsible: true
+    });
+    // $( "#serve" ).tooltip({
+    //     tooltipClass: 'tootip-box',
+    //     position: {
+    //         // my: 'left center'
+    //     },
+    //     content: function () {
+    //         return "<p style='width:120px; height: 20px;text-align: center;color: red;'>点击联系客服</p>";
+    //     }
+    // });
+    $( "#tel" ).tooltip({
+        tooltipClass: 'tootip-box',
+        position: {
+            at: 'right center'
+        },
+        content: function () {
+            return "<p style='line-height:20px;width:120px; height: 15px;color: blue; text-align: center'>{$config.tel}</p>";
+        }
+    });
+    $( "#mini" ).tooltip({
+        tooltipClass: 'tootip-box',
+        position: {
+            // my: 'left center'
+        },
+        content: function () {
+            return "<div style='width:140px; height: 120px; text-align: center'><img style='width: 120px;height:100px;background-color:#111111;margin:0 auto;' src='{$config.qrcode}'/><span style='text-align: left;font-size: 0.1em;display: block'>扫码为您提供更优质服务</span></div>";
+        }
+    });
+    $('.index-wrap,.article-detail-wrap,.article-wrap').scroll(function () {
+        let top_height = $(this).scrollTop();
+        if (top_height > 400){
+            $("#scroll-top").show();
+        }else{
+            $("#scroll-top").hide();
+        }
+    });
+
+</script>

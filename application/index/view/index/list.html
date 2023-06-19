@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="__CDN__/assets/js/frontend/baidu.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="惠创知识产权-提供商标免费查询、商标注册、商标转让、版权登记、专利申请、贯标、电商、高新企业认证、科技项目申报管理、增值电信理等服务!">
+    <meta name="keywords" content="商标注册，商标转让，版权登记，专利申请，3A认证，工商注册，企业注册，法人变更，变更增值电信，ICP，EDI，SP，IDC，IP-VPN，ISP，CDN，固定网国内数据传送业务">
+    <meta name="title" content="商标注册_icp备案,edi许可证注册,sp,isp许可证办理-惠创知识产权">
+    <link rel="shortcut icon" href="/assets/img/web/title_logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章列表-{$config['title']}</title>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/web/list.css" />
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/libs/jquery-ui/jquery-ui.css" />
+    <script src="__CDN__/assets/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="__CDN__/assets/libs/jquery-ui/jquery-ui.js"></script>
+    {include file="common/web/baidu" /}
+</head>
+<script>
+    $(document).on('click','.list-logo',function (){
+        window.location.href="/index/index/index.html"
+    })
+    $(document).on('click','.title',function (){
+        let id = $(this).data('id');
+        window.open("/index/index/article.html?id="+id);
+    })
+</script>
+<style>
+    .list-logo,.title{
+        cursor: pointer;
+    }
+    a{
+        text-decoration: none;
+    }
+</style>
+<body>
+    <div class="article-wrap">
+        <div class="article-wrap-title">
+            <div class="article-wrap-title-content">
+                <div class="article-detail-wrap-title-content-left list-logo" style="width:225px">
+                    <img src="/assets/img/web/title_logo_new.png" style="height:52px;width: 176px;" alt="">
+<!--                    <div style="float: right;width:175px;height:50px;text-align: center;font-weight: bold;font-size:18px;color: #292662bd" >-->
+<!--                        惠创知产<br/> <div style="padding-top:5px">www.hcytm.com</div>-->
+<!--                    </div>-->
+                </div>
+                <div class="article-wrap-title-content-right">
+                    <div class="index-wrap-title-content-right-desc" style="font-weight: bold;color: #676767">咨询热线:&nbsp&nbsp</div>
+                    <div class="index-wrap-title-content-right-tel" style="color: blue">{$config.tel}</div>
+                </div>
+            </div>
+        </div>
+        <div class="article-wrap-banner"><img style="height: 350px;width: 100%" src='/assets/img/web/banner.png' alt=""></div>
+        <div class="article-wrap-bread">
+            <span><a href="/index/index/index.html">首页</a> > 文章列表</span>
+        </div>
+        <div class="article-wrap-content">
+            <div id="tabs">
+                <ul>
+                    <li><a href="#fragment-1">公司并购疑难</a></li>
+                    <li><a href="#fragment-2">商标注册疑难</a></li>
+                    <li><a href="#fragment-3">增值电信许可证疑难</a></li>
+                    <li><a href="#fragment-4">知识产权疑难</a></li>
+                </ul>
+                <ul id="fragment-1">
+                    {if condition="!empty($answer['contentList']['gongsi_answer'])"}
+                    {foreach name="answer['contentList']['gongsi_answer']" item="gongsi"}
+                    <li>
+                        <div class="title" data-id="{$gongsi.id}">
+                            <span>{$gongsi.name|mb_substr=0,40}</span>
+                            <span>更新与:{$gongsi.updatetime|date="Y-m-d H:i:s",###}</span>
+                        </div>
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-2">
+                    {if condition="!empty($answer['contentList']['shangbiao_answer'])"}
+                    {foreach name="answer['contentList']['shangbiao_answer']" item="shangbiao"}
+                    <li>
+                        <div class="title" data-id="{$shangbiao.id}">
+                            <span>{$shangbiao.name|mb_substr=0,40}</span>
+                            <span>更新与:{$shangbiao.updatetime|date="Y-m-d H:i:s",###}</span>
+                        </div>
+<!--                        <div>-->
+<!--                            {if condition="strlen($shangbiao.description) > 60"}-->
+<!--                            <span>{$shangbiao.description||mb_substr=0,60}...</span>-->
+<!--                            {else}-->
+<!--                            <span>{$shangbiao.description}</span>-->
+<!--                            {/if}-->
+<!--                            <span><a href="/index/index/article?id={$shangbiao.id}" target="_blank">查看更多</a></span>-->
+<!--                        </div>-->
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-3">
+                    {if condition="!empty($answer['contentList']['zengzhi_answer'])"}
+                    {foreach name="answer['contentList']['zengzhi_answer']" item="zengzhi"}
+                    <li>
+                        <div class="title" data-id="{$zengzhi.id}">
+                            <span>{$zengzhi.name|mb_substr=0,40}</span>
+                            <span>更新与:{$zengzhi.updatetime|date="Y-m-d H:i:s",###}</span>
+                        </div>
+<!--                        <div>-->
+<!--                            {if condition="strlen($zengzhi.description) > 60"}-->
+<!--                            <span>{$zengzhi.description|mb_substr=0,60}...</span>-->
+<!--                            {else}-->
+<!--                            <span>{$zengzhi.description}</span>-->
+<!--                            {/if}-->
+<!--                            <span><a href="/index/index/article?id={$zengzhi.id}" target="_blank">查看更多</a></span>-->
+<!--                        </div>-->
+                    </li>
+                    {/foreach}
+                    {/if}
+                </ul>
+                <ul id="fragment-4">
+                    {if condition="!empty($answer['contentList']['zhishi_answer'])"}
+                    {foreach name="answer['contentList']['zhishi_answer']" item="zhishi"}
+                    <li>
+                        <div class="title" data-id="{$zhishi.id}">
+                            <span>{$zhishi.name|mb_substr=0,40}</span>
+                            <span>更新与:{$zhishi.updatetime|date="Y-m-d H:i:s",###}</span>
+                        </div>
+<!--                        <div>-->
+<!--                            {if condition="strlen($zhishi.description) > 60"}-->
+<!--                            <span>{$zhishi.description||mb_substr=0,60}...</span>-->
+<!--                            {else}-->
+<!--                            <span>{$zhishi.description}</span>-->
+<!--                            {/if}-->
+
+<!--                            <span><a href="/index/index/article?id={$zhishi.id}" target="_blank">查看更多</a></span>-->
+<!--                        </div>-->
+                    </li>
+                    {/foreach}
+                    {/if}
+
+                </ul>
+            </div>
+            
+        </div>
+        {include file="common/web/footer" /}

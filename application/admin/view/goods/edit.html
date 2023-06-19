@@ -1,0 +1,223 @@
+<style>
+    .title{
+        font-size: 2rem;
+        font-weight: bolder;
+    }
+    .readonly{
+        line-height: 30px;
+    }
+</style>
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-group">
+        <label class="title control-label col-xs-12 col-sm-3">{:__('公司信息')}</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Campany_name')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.campany_name|htmlentities}</p>
+<!--            <input id="c-campany_name" data-rule="required" class="form-control" name="row[campany_name]" type="hidden" value="{$row.campany_name|htmlentities}">-->
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Industry_type')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.industry_type|htmlentities}</p>
+<!--            <input id="c-industry_type" class="form-control" name="row[industry_type]" type="hidden" value="{$row.industry_type|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Campany_type')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.campany_type}</p>
+<!--            <select  id="c-campany_type" data-rule="required" class="form-control selectpicker" name="row[campany_type]">-->
+<!--                {foreach name="campanyTypeList" item="vo"}-->
+<!--                    <option value="{$key}" {in name="key" value="$row.campany_type"}selected{/in}>{$vo}</option>-->
+<!--                {/foreach}-->
+<!--            </select>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Property')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.property|htmlentities}</p>
+<!--            <input id="c-property" class="form-control" name="row[property]" type="hidden" value="{$row.property|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Create_date')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.create_date|htmlentities}</p>
+<!--            <input id="c-create_date" data-rule="required" class="form-control" name="row[create_date]" type="hidden" value="{$row.create_date|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Create_money')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.create_money|htmlentities}</p>
+<!--            <input id="c-create_money" data-rule="required" class="form-control" name="row[create_money]" type="hidden" value="{$row.create_money|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Current_money')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.current_money|htmlentities}</p>
+<!--            <input id="c-current_money" data-rule="required" class="form-control" name="row[current_money]" type="hidden" value="{$row.current_money|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Business_scope')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.business_scope|htmlentities}</p>
+<!--            <input id="c-business_scope" class="form-control" name="row[business_scope]" type="hidden" value="{$row.business_scope|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Image')}:</label>
+        <div class="col-xs-12 col-sm-7">
+<!--            <div class="input-group">-->
+<!--                <input id="c-image" data-rule="required" class="form-control" size="50" name="row[image]" type="hidden" value="{$row.image|htmlentities}">-->
+<!--                <div class="input-group-addon no-border no-padding">-->
+<!--                    <span><button type="button" id="faupload-image" class="btn btn-danger faupload" data-input-id="c-image" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/bmp" data-multiple="false" data-preview-id="p-image"><i class="fa fa-upload"></i> {:__('Upload')}</button></span>-->
+<!--                    <span><button type="button" id="fachoose-image" class="btn btn-primary fachoose" data-input-id="c-image" data-mimetype="image/*" data-multiple="false"><i class="fa fa-list"></i> {:__('Choose')}</button></span>-->
+<!--                </div>-->
+<!--                <span class="msg-box n-right" for="c-image"></span>-->
+<!--            </div>-->
+<!--            <ul class="row list-inline faupload-preview" id="p-image"></ul>-->
+            <img src="{$row.image}" class="data-tips-image" alt="" style="width: 290px;height: 420px">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3"></label>
+        <div class="col-xs-12 col-sm-7">
+            <a href="{$row.image}" target="_blank">点击查看原图</a>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="title control-label col-xs-12 col-sm-3">{:__('银行税务信息')}</label>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Tas_types')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row['tas_types']|default=''}</p>
+<!--            <select  id="c-tas_types" data-rule="required" class="form-control selectpicker" name="row[tas_types]">-->
+<!--                {foreach name="tasTypesList" item="vo"}-->
+<!--                    <option value="{$key}" {in name="key" value="$row.tas_types"}selected{/in}>{$vo}</option>-->
+<!--                {/foreach}-->
+<!--            </select>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Tas_returns')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row['tas_returns']|default=''}</p>
+<!--            <select  id="c-tas_returns" data-rule="required" class="form-control selectpicker" name="row[tas_returns]">-->
+<!--                {foreach name="tasReturnsList" item="vo"}-->
+<!--                    <option value="{$key}" {in name="key" value="$row.tas_returns"}selected{/in}>{$vo}</option>-->
+<!--                {/foreach}-->
+<!--            </select>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Invoice_status')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row['invoice_status']|default=''}</p>
+<!--            <div class="radio">-->
+<!--            {foreach name="invoiceStatusList" item="vo"}-->
+<!--            <label for="row[invoice_status]-{$key}"><input id="row[invoice_status]-{$key}" name="row[invoice_status]" type="radio" value="{$key}" {in name="key" value="$row.invoice_status"}checked{/in} /> {$vo}</label> -->
+<!--            {/foreach}-->
+<!--            </div>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Open_account')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row['open_account']|default=''}</p>
+<!--            <select  id="c-open_account" data-rule="required" class="form-control selectpicker" name="row[open_account]">-->
+<!--                {foreach name="openAccountList" item="vo"}-->
+<!--                    <option value="{$key}" {in name="key" value="$row.open_account"}selected{/in}>{$vo}</option>-->
+<!--                {/foreach}-->
+<!--            </select>-->
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="title control-label col-xs-12 col-sm-3">{:__('转让信息')}</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Sell_money')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.sell_money|htmlentities}</p>
+<!--            <input id="c-sell_money" data-rule="required" class="form-control" name="row[sell_money]" type="hidden" value="{$row.sell_money|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Contacts')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.contacts|htmlentities}</p>
+<!--            <input id="c-contacts" class="form-control" name="row[contacts]" type="hidden" value="{$row.contacts|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Contacts_tel')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <p class="readonly">{$row.contacts_tel|htmlentities}</p>
+<!--            <input id="c-contacts_tel" class="form-control" name="row[contacts_tel]" type="hidden" value="{$row.contacts_tel|htmlentities}">-->
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="title control-label col-xs-12 col-sm-4">{:__('调整公司名称选择顾问')}</label>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Campany_name_show')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <input id="c-campany_name_show" data-rule="required" class="form-control" name="row[campany_name_show]" type="text" value="{$row.campany_name_show|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('选择主顾问')}:</label>
+        <div class="radio">
+            {foreach name="adviser" item="vo"}
+            <label for="row[status]-{$key}"><input id="row[adviser_id]-{$key}" name="row[adviser_id]" type="radio" value="{$key}" {in name="key" value="$row.adviser_id"}checked{/in} /> {$vo}</label>
+            {/foreach}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('选择其他顾问')}:</label>
+        <div class="checkbox">
+            {foreach name="adviser" item="vo"}
+            <label for="row[status]-{$key}"><input id="row[other_adviser_id]-{$key}" name="other_adviser_id[]" type="checkbox" value="{$key}" {in name="key" value="$row.other_adviser_id"}checked{/in} /> {$vo}</label>
+            {/foreach}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('原因')}:</label>
+        <div class="col-xs-12 col-sm-7">
+            <textarea id="c-reason" name="row[reason]" class="form-control" cols="30" rows="5">{$row.reason|default=''}</textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-3">{:__('Status')}:</label>
+        <div class="col-xs-12 col-sm-7">
+
+            <div class="radio">
+                {foreach name="statusList" item="vo"}
+                <label for="row[status]-{$key}"><input id="row[status]-{$key}" name="row[status]" type="radio" value="{$key}" {in name="key" value="$row.status"}checked{/in} /> {$vo}</label>
+                {/foreach}
+            </div>
+        </div>
+    </div>
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-3"></label>
+        <div class="col-xs-12 col-sm-7">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>

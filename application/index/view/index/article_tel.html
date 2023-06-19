@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="__CDN__/assets/js/frontend/baidu.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{$config['title']}</title>
+    <meta name="description" content="惠创知识产权-提供商标免费查询、商标注册、商标转让、版权登记、专利申请、贯标、电商、高新企业认证、科技项目申报管理、增值电信理等服务!">
+    <meta name="keywords" content="商标注册，商标转让，版权登记，专利申请，3A认证，工商注册，企业注册，法人变更，变更增值电信，ICP，EDI，SP，IDC，IP-VPN，ISP，CDN，固定网国内数据传送业务">
+    <link rel="shortcut icon" href="/assets/img/web/title_logo.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/libs/jquery-ui/jquery-ui.css" />
+    <script src="__CDN__/assets/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="__CDN__/assets/libs/jquery-ui/jquery-ui.js"></script>
+    <script src="__CDN__/assets/js/frontend/web/common.js"></script>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/web/article_tel.css?v=12121" />
+</head>
+<body>
+    <div class="article-detail-wrap">
+        <div class="article-detail-wrap-head">
+            <span class="return" id="return">
+                <img src="/assets/img/web/return.png">
+            </span>
+            <span>详情页</span>
+        </div>
+        <div class="article-detail-wrap-title">
+            <div class="article-detail-wrap-title-content">
+                <div class="article-detail-wrap-title-content-left logo_index">
+                        <img src="/assets/img/web/title_logo_new.png"  alt="">
+                </div>
+                <div class="article-detail-wrap-title-content-right">
+                    <div class="article-detail-wrap-title-content-right-desc">咨询热线</div>
+                    <div class="article-detail-wrap-title-content-right-tel">{$config.tel}</div>
+                </div>
+            </div>
+        </div>
+        <div class="article-detail-wrap-banner"><img style="height: 100%;width: 100%" src='/assets/img/web/banner.png' alt=""></div>
+        <div class="article-detail-wrap-bread">
+            <span><a href="/index/index/index.html">首页</a> > <a href="/index/index/list.html">文章列表</a> > 文章详情</span>
+        </div>
+        <div class="article-detail-wrap-content">
+            <h3>{$article.name}</h3>
+            <h5>{$article.updatetime|date="Y-m-d H:i:s",###}</h5>
+            <p>{$article.article}</p>
+        </div>
+        <div class="footer">
+            <div class="footer-content">
+                <div class="footer-content-left">
+                    <h3>{$config.corporate_name}</h3>
+                    <p>公司地址：{$config.address}</p>
+                    <p>{$config.icp}</p>
+                </div>
+                <div class="footer-content-right">
+                    <div class="web weibo"><img style="width: 48px;height: 48px" src="/assets/img/web/weibo.png" alt=""></div>
+                    <div class="qq" data-qq="{$config.indexqq}"><img style="width: 48px;height: 48px" src="/assets/img/web/qq.png" alt=""></div>
+                    <div class="wx"><img src="{$config.qrcode}" style="width: 158px;height: 158px" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="extra-box">
+        <div class="extra-box-item">
+            <div class="img">
+                <img src="/assets/img/web/wx_tel.png">
+            </div>
+            <span id="serve"><a title="">咨询</a></span>
+        </div>
+        <div class="extra-box-item">
+            <div class="img"></div>
+            <span id="tel"><a title="">电话</a></span>
+        </div>
+        <div class="extra-box-item">
+            <div class="img"></div>
+            <span id="mini"><a title="">二维码</a></span>
+        </div>
+        <div class="extra-box-item" id="scroll-top">
+            <div class="img"></div>
+            <span>置顶</span>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(".logo_index").click(function(){
+        window.location.href="/index/index/index";
+    });
+    $('#return').click(function () {
+        window.history.back(-1);
+    })
+</script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+    let wxappid = '{$wxConfig["appid"]}'
+    let wxnoncestr = '{$wxConfig["noncestr"]}'
+    let wxtimestamp = '{$wxConfig["timestamp"]}'
+    let wxsignatrue = '{$wxConfig["signatrue"]}'
+    let shareUrl = '{$wxConfig["shareUrl"]}'
+    let wxtitle = '{$config["title"]}';
+    let logo = '{$config["share_img"]}';
+    console.log(logo);
+    console.log(shareUrl);
+    // alert(wxappid);
+    wx.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: wxappid, // 必填，公众号的唯一标识
+        timestamp: wxtimestamp, // 必填，生成签名的时间戳
+        nonceStr: wxnoncestr, // 必填，生成签名的随机串
+        signature: wxsignatrue,// 必填，签名
+        jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'onMenuShareAppMessage','onMenuShareTimeline', 'onMenuShareQQ', 'onMenuShareQZone'] // 必填，需要使用的JS接口列表
+    });
+
+    wx.ready(function () {      //需在用户可能点击分享按钮前就先调用
+        wx.onMenuShareTimeline({
+            title: wxtitle, // 分享标题
+            link: shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: logo, // 分享图标
+            success: function () {
+                // 用户点击了分享后执行的回调函数
+            }
+        })
+    });
+    // wx.updateTimelineShareData({
+    //     title: wxtitle, // 分享标题
+    //     link: shareUrl, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+    //     imgUrl: logo, // 分享图标
+    //     success: function () {
+    //         // 设置成功
+    //         alert('成功')
+    //     }
+    // });
+</script>

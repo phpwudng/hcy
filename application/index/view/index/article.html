@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="__CDN__/assets/js/frontend/baidu.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="/assets/img/web/title_logo.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="惠创知识产权-提供商标免费查询、商标注册、商标转让、版权登记、专利申请、贯标、电商、高新企业认证、科技项目申报管理、增值电信理等服务!">
+    <meta name="keywords" content="商标注册，商标转让，版权登记，专利申请，3A认证，工商注册，企业注册，法人变更，变更增值电信，ICP，EDI，SP，IDC，IP-VPN，ISP，CDN，固定网国内数据传送业务">
+    <meta name="title" content="商标注册_icp备案,edi许可证注册,sp,isp许可证办理-惠创知识产权">
+    <title>文章详情-{$config['title']}</title>
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/css/web/article.css" />
+    <link rel="stylesheet" type="text/css" href="__CDN__/assets/libs/jquery-ui/jquery-ui.css" />
+    <script src="__CDN__/assets/libs/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="__CDN__/assets/libs/jquery-ui/jquery-ui.js"></script>
+    {include file="common/web/baidu" /}
+</head>
+<script>
+    $(document).on('click','.article-logo',function (){
+        window.location.href="/index/index/index.html"
+    })
+</script>
+<style>
+    .article-logo{
+        cursor: pointer;
+    }
+</style>
+<body>
+    <div class="article-detail-wrap">
+        <div class="article-detail-wrap-title">
+            <div class="article-detail-wrap-title-content">
+                <div class="article-detail-wrap-title-content-left article-logo" style="width:225px">
+                    <img src="/assets/img/web/title_logo_new.png" style="height:52px;width: 176px;" alt="">
+<!--                    <div style="float: right;width:175px;height:50px;text-align: center;font-weight: bold;font-size:18px;color: #292662bd" >-->
+<!--                        惠创知产<br/> <div style="padding-top:5px">www.hcytm.com</div>-->
+<!--                    </div>-->
+                </div>
+                <div class="article-detail-wrap-title-content-right">
+                    <div class="index-wrap-title-content-right-desc" style="font-weight: bold;color: #676767">咨询热线:&nbsp&nbsp</div>
+                    <div class="index-wrap-title-content-right-tel" style="color: blue">{$config.tel}</div>
+                </div>
+            </div>
+        </div>
+        <div class="article-detail-wrap-banner"><img style="height: 350px;width: 100%" src='/assets/img/web/banner.png' alt=""></div>
+        <div class="article-detail-wrap-bread">
+            <span><a href="/index/index/index.html">首页</a> > <a href="/index/index/list.html">文章列表</a> > 文章详情</span>
+        </div>
+        <div class="article-detail-wrap-content">
+            <h3>{$article.name}</h3>
+            <h5>{$article.updatetime|date="Y-m-d H:i:s",###}</h5>
+            <p>{$article.article}</p>
+        </div>
+        {include file="common/web/footer" /}
