@@ -4,6 +4,7 @@ namespace app\api\controller;
 
 use app\common\controller\Api;
 use app\common\service\LogService;
+use fast\Http;
 
 /**
  * 示例接口
