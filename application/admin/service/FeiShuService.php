@@ -29,12 +29,12 @@ class FeiShuService
         ];
         $params = json_encode($params,JSON_UNESCAPED_SLASHES);
         $token = self::getToken();
-          LogService::info("params:{$token}");
-          LogService::info("params:{$params}");
+          echo("params:{$token}");
+          echo("params:{$params}");
         $res = Http::post($uri,$params,[
             CURLOPT_HTTPHEADER => ["content-Type:application/json","charset=utf-8","Authorization:Bearer {$token}"],
         ]);
-          LogService::info("发送结果:{$res}");
+          echo("发送结果:{$res}");
 
     }
 
@@ -50,7 +50,7 @@ class FeiShuService
                 'app_id'=>self::$appid,
                 'app_secret'=>self::$secret
             ];
-              LogService::info("params:".json_encode($params));
+              echo("params:".json_encode($params));
             $res = Http::post($uri,json_encode($params,JSON_UNESCAPED_SLASHES),[
                 CURLOPT_HTTPHEADER => ['content-Type: application/json; charset=utf-8'],
             ]);
@@ -58,11 +58,11 @@ class FeiShuService
             if ($resArr['code'] == 0){
                 $token = $resArr['tenant_access_token'];
 
-                  LogService::info("RES_TOKEN:{$res}".PHP_EOL);
+                  echo("RES_TOKEN:{$res}".PHP_EOL);
                 Cache::set('TOKEN',$token,3600);
             }
         }else{
-              LogService::info("CACHE_TOKEN:{$token}");
+              echo("CACHE_TOKEN:{$token}");
         }
         return $token;
 
@@ -82,12 +82,12 @@ class FeiShuService
         ];
         $params = json_encode($params,JSON_UNESCAPED_SLASHES);
         $token = self::getToken();
-          LogService::info("params:{$token}");
-          LogService::info("params:{$params}");
+          echo("params:{$token}");
+          echo("params:{$params}");
         $res = Http::get($uri,$params,[
             CURLOPT_HTTPHEADER => ["Content-Type:application/json","charset=utf-8","Authorization: Bearer {$token}"],
         ]);
-          LogService::info("发送结果:{$res}");
+          echo("发送结果:{$res}");
 
     }
 }

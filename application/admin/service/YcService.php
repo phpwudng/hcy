@@ -84,10 +84,10 @@ class YcService
             $params['customerSku'] = $sku;
         }
         $token = self::getToken();
-        LogService::info("params:{$token}");
+        echo("params:{$token}");
         $message = "";
         while (true){
-            LogService::info($params['page'].PHP_EOL);
+            echo($params['page'].PHP_EOL);
             $res = Http::POST($uri,json_encode($params,JSON_UNESCAPED_SLASHES),[
                 CURLOPT_HTTPHEADER => ["Content-Type:application/json","charset=utf-8","Authorization: Bearer {$token}"],
             ]);
@@ -102,7 +102,7 @@ class YcService
                     }
                 }
             }else{
-                LogService::info("获取库存异常:".json_encode($res));
+                echo("获取库存异常:".json_encode($res));
                 break;
             }
             usleep(400000);
@@ -112,7 +112,7 @@ class YcService
             $pre = "库存低于{$top}的SKU:".PHP_EOL;
             $message = $pre.$message;
         }
-        LogService::info($message);
+        echo($message);
         return $message;
 
     }

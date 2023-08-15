@@ -23,14 +23,14 @@ class YcSendMessage extends Command
     protected function execute(Input $input, Output $output)
     {
 
+        WxgjService::checkStack();
+
+        WxgjService::checkUnOrders();
         $message = YcService::checkStack();
         if (!empty($message)){
             FeiShuService::sendMessage($message);
         }
-//        YcService::testSign();
-        WxgjService::checkUnOrders();
-
-        LogService::info("发送完成");
+        echo("发送完成");
 
     }
 }
