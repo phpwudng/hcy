@@ -76,7 +76,7 @@ class YcService
 
         $uri = self::$url."/api/openPlatform/stock/list";
         $params = [
-            'warehouseCode'=>'021',
+            'warehouseCode'=>'022',
             'page'=>1,
             'prePage'=>100,
         ];

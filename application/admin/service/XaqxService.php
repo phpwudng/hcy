@@ -7,17 +7,30 @@ use fast\Http;
 use Monolog\Handler\IFTTTHandler;
 use think\Cache;
 
-class WxgjService
+class XaqxService
 {
 
-    public static $url = "https://wxgj.shopeeok.com/";
+    public static $url = "https://xaqx.shopeeok.com/";
 
     public static $header = [
         "Content-Type:application/json;charset=UTF-8",
-        "Set-Cookie:_ati=5636080998074;SERVERID=1cca1c029ff510acf0d6bc5315a401b9|1692000068|1691999452",
-        "Referer:https://wxgj.shopeeok.com/duiguo/order/manage/readytoship",
-        "X-Access-Token:7e34f9dfd7934805991574c8a107e7d5",
+        "_ati=5636080998074; SERVERID=1cca1c029ff510acf0d6bc5315a401b9|1708950302|1708949412",
+        "Referer:https://xaqx.shopeeok.com/duiguo/seller/store/manage",
+        "X-Access-Token:45e0aae1cab1409aa90f95dfe2dbec70",
     ];
+
+    public static function syncStore()
+    {
+        $uri = self::$url . "agent-foreign/shopee/shopeePushRule/doPush?ruleIds=1760690488748486657";
+        $header = self::$header;
+        echo $uri . PHP_EOL;
+        $res = Http::post($uri, [], [
+            CURLOPT_HTTPHEADER => $header,
+        ]);
+        $resArr = json_decode($res, true);
+        var_dump($resArr);
+
+    }
 
     /**
      * 获取token
