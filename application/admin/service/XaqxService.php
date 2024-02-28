@@ -19,17 +19,46 @@ class XaqxService
         "X-Access-Token:45e0aae1cab1409aa90f95dfe2dbec70",
     ];
 
-    public static function syncStore()
+    public static function syncStore($id)
     {
-        $uri = self::$url . "agent-foreign/shopee/shopeePushRule/doPush?ruleIds=1760690488748486657";
+        $uri = self::$url . "agent-foreign/shopee/shopeePushRule/doPush?ruleIds={$id}";
         $header = self::$header;
         echo $uri . PHP_EOL;
         $res = Http::post($uri, [], [
             CURLOPT_HTTPHEADER => $header,
         ]);
-        $resArr = json_decode($res, true);
-        var_dump($resArr);
+        echo "库存同步规则:{$id},{$res}";
 
+    }
+
+    public static function getRuleList()
+    {
+        $ids = [];
+        $tryNum = 3;
+        while (empty($ids) && $tryNum>0){
+            $uri = self::$url . "/agent-foreign/shopee/shopeePushRule/list";
+            $header = self::$header;
+            LogService::info($uri . PHP_EOL);
+            $res = Http::get($uri, [], [
+                CURLOPT_HTTPHEADER => $header,
+            ]);
+            $resArr = json_decode($res, true);
+
+            echo $resArr['result']['total'].PHP_EOL;
+            if ($resArr['code'] == 200 && $resArr['result']['total']){
+                foreach ($resArr['result']['records'] as $item){
+                    $ids[] = $item['id'];
+                }
+            }
+            $tryNum--;
+        }
+        if (!empty($ids)){
+            foreach ($ids as $id){
+                self::syncStore($id);
+                sleep(5);
+            }
+        }
+        LogService::info("库存同步完成");
     }
 
     /**

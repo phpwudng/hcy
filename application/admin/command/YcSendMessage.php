@@ -40,6 +40,9 @@ class YcSendMessage extends Command
             case 4:
                 XaqxService::syncStore();
                 break;
+            case 5:
+                XaqxService::getRuleList();
+                break;
             case 0:
                 echo "发送消息".PHP_EOL;
                 $this->send();
