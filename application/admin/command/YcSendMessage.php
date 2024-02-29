@@ -20,7 +20,7 @@ class YcSendMessage extends Command
         $site = Config::get('site');
         $this
             ->setName('YcSendMessage')
-            ->addOption('check','c',Option::VALUE_OPTIONAL,'检查订单',0);
+            ->addOption('check','t',Option::VALUE_OPTIONAL,'检查订单',0);
     }
 
     protected function execute(Input $input, Output $output)

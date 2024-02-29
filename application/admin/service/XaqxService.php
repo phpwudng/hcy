@@ -55,7 +55,7 @@ class XaqxService
         if (!empty($ids)){
             foreach ($ids as $id){
                 self::syncStore($id);
-                sleep(5);
+                sleep(30);
             }
         }
         LogService::info("库存同步完成");
