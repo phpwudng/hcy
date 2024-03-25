@@ -2,8 +2,10 @@
 
 namespace app\admin\service;
 
+use app\common\library\Log;
 use app\common\service\LogService;
 use fast\Http;
+use GuzzleHttp\Client;
 use Monolog\Handler\IFTTTHandler;
 use think\Cache;
 
@@ -15,8 +17,14 @@ class XaqxService
     public static $header = [
         "Content-Type:application/json;charset=UTF-8",
         "_ati=5636080998074; SERVERID=1cca1c029ff510acf0d6bc5315a401b9|1708950302|1708949412",
-        "Referer:https://xaqx.shopeeok.com/duiguo/seller/store/manage",
+        "Referer:https://xaqx.shopeeok.com",
         "X-Access-Token:45e0aae1cab1409aa90f95dfe2dbec70",
+    ];
+
+    public static $headerArr = [
+        "Content-Type"=>"application/json;charset=UTF-8",
+        "Referer"=>"https://xaqx.shopeeok.com",
+        "X-Access-Token"=>"45e0aae1cab1409aa90f95dfe2dbec70",
     ];
 
     public static function syncStore($id)
@@ -28,6 +36,7 @@ class XaqxService
             CURLOPT_HTTPHEADER => $header,
         ]);
         echo "库存同步规则:{$id},{$res}";
+        \think\Log::info("库存同步规则:{$id},{$res}");
 
     }
 
@@ -47,6 +56,10 @@ class XaqxService
             echo $resArr['result']['total'].PHP_EOL;
             if ($resArr['code'] == 200 && $resArr['result']['total']){
                 foreach ($resArr['result']['records'] as $item){
+                    if ($item['pushStatus'] != 1){
+                        LogService::info("推送任务没有开启:{$item['id']}");
+                        continue;
+                    }
                     $ids[] = $item['id'];
                 }
             }
@@ -59,6 +72,97 @@ class XaqxService
             }
         }
         LogService::info("库存同步完成");
+    }
+
+    /**
+     * 获取所有有库存的本地商品ID
+     */
+    public static function getStoreSku()
+    {
+        $page = 1;
+        $pageSize = 100;
+        $skus = [];
+        while (true){
+            $uri = self::$url . "agent-foreign/shopee/userStock/list?_t=1711338947&column=remainNum&order=desc&field=id,,,wareHouse,undefined,categoryName,volume,remainNum,availableNum,frozenNum,day-minstock,count-sales,onTheWayNum,cost-total,action&pageNo={$page}&pageSize={$pageSize}";
+            echo $uri . PHP_EOL;
+            $res = Http::get($uri, [], [
+                CURLOPT_HTTPHEADER => self::$header
+            ]);
+            $resArr = json_decode($res, true);
+
+            if ($resArr['success'] === true && !empty($resArr['result']['page']['records'])){
+                foreach ($resArr['result']['page']['records'] as $item){
+                    if ($item['availableNum'] > 0 && $item['sku']){
+                        $skus[] = $item['sku'];
+                    }
+                }
+            }else{
+                break;
+            }
+            sleep(1);
+            $page++;
+        }
+        return $skus;
+
+    }
+
+    public static function setRuleByLocalProduct($storeSku)
+    {
+        $page = 1;
+        $pageSize = 50;
+        while (true){
+            $uri = self::$url."agent-foreign/product/local/list?_t=1711359767&productType=0&column=createTime&order=desc&field=id,,sysCode,image,variationName,shopInfo,volume,cost,action&pageNo={$page}&pageSize={$pageSize}";
+            echo $uri . PHP_EOL;
+            $res = Http::get($uri, [], [
+                CURLOPT_HTTPHEADER => self::$header
+            ]);
+            $ids = [];
+            $resArr = json_decode($res, true);
+            if ($resArr['success'] === true && !empty($resArr['result']['records'])){
+                foreach ($resArr['result']['records'] as $item){
+                    if (!empty($item['sku']) && in_array($item['sku'],$storeSku,true)){
+                        $ids[] = $item['id'];
+                    }
+                }
+            }else{
+                break;
+            }
+            if (!empty($ids)){
+                $productIds = implode(",",$ids);
+                self::addRule($productIds,$page);
+            }
+            sleep(1);
+            $page++;
+        }
+    }
+
+    public static function addRule($productIds,$page)
+    {
+        $uri = self::$url . "agent-foreign/shopee/shopeePushRule/add";
+
+        $params = [
+            'firstShopId'=>'1759870897442660354',
+            'firstShopStatus'=>1,
+            'firstShopStockNum'=>1,
+            'localProductIds'=>$productIds,
+            'minStockStatus'=>2,
+            'minStockNum'=>null,
+            'pushPercent'=>100,
+            'ruleName'=>'自动生成规则-'.$page,
+            'shopIds'=>'1759870897442660354,1759871280361644033',
+            'warehouseIds'=>1757
+        ];
+
+        echo $uri.PHP_EOL;
+        $option = [
+            'json' => $params,
+            'headers' => self::$headerArr,
+        ];
+        $client = new Client();
+        $response = $client->post($uri,$option);
+        $res = $response->getBody()->getContents();
+        echo $res;
+        \think\Log::info("创建结果:{$res}");
     }
 
     /**

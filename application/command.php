@@ -18,5 +18,6 @@ return [
     'app\admin\command\Addon',
     'app\admin\command\Api',
     'app\admin\command\YcSendMessage',
+    'app\admin\command\SyncNums',
 ];
 

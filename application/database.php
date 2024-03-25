@@ -20,9 +20,9 @@ return [
     // 数据库名
     'database'        => Env::get('database.database', 'hcy'),
     // 用户名
-    'username'        => Env::get('database.username', 'root'),
+    'username'        => Env::get('database.username', 'hcyweb'),
     // 密码
-    'password'        => Env::get('database.password', 'hcy888'),
+    'password'        => Env::get('database.password', '508bb7d30a9891eb'),
     // 端口
     'hostport'        => Env::get('database.hostport', ''),
     // 连接dsn

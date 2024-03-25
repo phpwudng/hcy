@@ -64,7 +64,6 @@ class Redis
                 $name = 'del';
             }
             Log::info('redis:'.$name.':'.json_encode($arguments));
-            LogService::info();
             $ret = call_user_func_array([self::$connect, $name], $arguments);
             return $ret;
         }catch (\Exception $e){
