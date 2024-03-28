@@ -8,6 +8,7 @@ use fast\Http;
 use GuzzleHttp\Client;
 use Monolog\Handler\IFTTTHandler;
 use think\Cache;
+use think\Db;
 
 class XaqxService
 {
@@ -322,7 +323,6 @@ class XaqxService
         $file = "./sku.txt";
         $page = 1;
         $pageSize = 200;
-        $temp="";
         while (true){
             $uri = self::$url."/agent-foreign/shopItem/list?_t=1697186219&column=createTime&order=desc&field=id,,undefined,shopInfo,sku-name,action&pageNo={$page}&pageSize={$pageSize}";
             $header = self::$header;
@@ -403,21 +403,63 @@ class XaqxService
     public static function getAllOrders()
     {
         $page = 1;
-        $pageSize = 200;
-        $uri = self::$url . "/agent-foreign/order/list?_t=1698238191&agoFlag=0&queryType=1&orderBy=2&column=createTime&order=desc&field=id,&dgStatus=allhandle&pageNo={$page}&pageSize={$pageSize}";
-        $header = self::$header;
-        echo $uri . PHP_EOL;
-        $res = Http::get($uri, [], [
-            CURLOPT_HTTPHEADER => $header,
-        ]);
-        $resArr = json_decode($res, true);
-        $ids = [];
-        if ($resArr['code'] == 0) {
-            foreach ($resArr['result']['records'] as $orders) {
-                $ids[] = $orders['ordersn'];
+        $pageSize = 100;
+        $inserts = [];
+        while (true){
+            $tryNum = 3;
+            $uri = self::$url . "/agent-foreign/order/list?_t=1698238191&agoFlag=0&orderBy=2&column=createTime&order=desc&field=id,&dgStatus=allhandle&pageNo={$page}&pageSize={$pageSize}";
+            $header = self::$header;
+            echo $uri . PHP_EOL;
+            $resArr = [];
+            while ($tryNum > 0){
+                try {
+                    $res = Http::get($uri, [], [
+                        CURLOPT_HTTPHEADER => $header,
+                    ]);
+                }catch (\Throwable $throwable){
+                    echo "异常重试中...";
+                }
+                if (!empty($res)){
+                    $resArr = json_decode($res, true);
+                    break;
+                }else{
+                    echo "重试中...";
+                }
+                sleep(3);
+                $tryNum--;
             }
+            if ($resArr['success'] == true) {
+                if (empty($resArr['result']['records'])){
+                    var_dump($resArr);
+                    break;
+                }
+                foreach ($resArr['result']['records'] as $orders) {
+                    $temp = [
+                        'orders_id'=> $orders['ordersn'],
+                        'orders_status'=>$orders['orderStatusQuery'],
+                        'orders_pay_date'=>$orders['deliveryTime'],
+                        'orders_ship_date'=>$orders['shipByDate'],
+                    ];
+                    $inserts[] = $temp;
+                }
+            }else{
+                var_dump($resArr);
+                break;
+            }
+            foreach ($inserts as $order){
+                $find = Db::table('orders_track')->find($order['orders_id']);
+                if ($find){
+                    Db::table('orders_track')->where('orders_id',$order['orders_id'])->update($order);
+                }else{
+                    Db::table('orders_track')->insert($order);
+                }
+            }
+            $inserts = [];
+            $page++;
+            sleep(5);
         }
-        return $ids;
+
+        return true;
 
     }
 

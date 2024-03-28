@@ -13,6 +13,7 @@ use think\console\Command;
 use think\console\Input;
 use think\console\input\Option;
 use think\console\Output;
+use think\Db;
 
 class SyncNums extends Command
 {
@@ -31,6 +32,10 @@ class SyncNums extends Command
                 echo "创建同步库存规则".PHP_EOL;
                 $this->getSku();
                 break;
+            case 'all_orders':
+                $this->getAllOrders();
+                break;
+
         }
         echo("执行完成");
 
@@ -51,5 +56,10 @@ class SyncNums extends Command
             echo $throwable->getMessage();
             echo PHP_EOL;
         }
+    }
+
+    private function getAllOrders()
+    {
+        $data = XaqxService::getAllOrders();
     }
 }
