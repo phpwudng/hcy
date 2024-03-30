@@ -130,4 +130,5 @@ CREATE TABLE `orders_track` (
                                 PRIMARY KEY (`id`),
                                 UNIQUE orders_id(orders_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单跟进表';
+alter table orders_track add shop_id varchar(64) default "" comment '店铺ID';
 

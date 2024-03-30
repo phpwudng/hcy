@@ -439,15 +439,15 @@ class XaqxService
                         'orders_status'=>$orders['orderStatusQuery'],
                         'orders_pay_date'=>$orders['deliveryTime'],
                         'orders_ship_date'=>$orders['shipByDate'],
+                        'shop_id'=>$orders['shopId'],
                     ];
                     $inserts[] = $temp;
                 }
             }else{
-                var_dump($resArr);
                 break;
             }
             foreach ($inserts as $order){
-                $find = Db::table('orders_track')->find($order['orders_id']);
+                $find = Db::table('orders_track')->where('orders_id',$order['orders_id'])->find();
                 if ($find){
                     Db::table('orders_track')->where('orders_id',$order['orders_id'])->update($order);
                 }else{

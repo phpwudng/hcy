@@ -24,36 +24,86 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 columns: [
                     [
                         {checkbox: true},
-                        {field: 'id', title: __('Id')},
                         {field: 'orders_id', title: __('Orders_id')},
-                        {field: 'orders_status', title: __('Orders_status'), formatter: Table.api.formatter.status},
-                        {field: 'orders_pay_date', title: __('Orders_pay_date'),operate:'LIKE'},
-                        {field: 'orders_ship_date', title: __('Orders_ship_date'),operate:'LIKE'},
-                        {field: 'orders_to_factory_date', title: __('Orders_to_factory_date'),operate:'LIKE'},
-                        {field: 'orders_from_factory_date', title: __('Orders_from_factory_date'),operate:'LIKE'},
+                        {
+                            field: 'orders_status',
+                            title: __('Orders_status'),
+                            searchList: {
+                                "pending": "待出货-未申请",
+                                "packed": "待出货-已申请",
+                                "packed_unconfirmed": "已申请-未确认",
+                                "ready_to_ship": "待出货-已取件",
+                                "shipped": "运输中",
+                                "in_cancel": "取消中",
+                                "completed": "已完成",
+                                "canceled": "已取消",
+                                "confirmed": "已收货",
+                                "returned": "已退货",
+                                "other": "其他"
+                            },
+                            formatter: Table.api.formatter.status
+                        },
+                        {
+                            field: 'orders_pay_date',
+                            title: __('Orders_pay_date'),
+                            operate: 'RANGE',
+                            addclass: 'datetimerange'
+                        },
+                        {field: 'orders_ship_date', title: __('Orders_ship_date'), operate: 'LIKE'},
+                        {field: 'orders_to_factory_date', title: __('Orders_to_factory_date'), operate: 'LIKE'},
+                        {field: 'orders_from_factory_date', title: __('Orders_from_factory_date'), operate: 'LIKE'},
                         {field: 'factory_number', title: __('Factory_number')},
-                        {field: 'factory_remark', title: __('Factory_remark')},
-                        {field: 'factory_number_remark', title: __('Factory_number_remark')},
-                        {field: 'orders_to_yw_date', title: __('Orders_to_yw_date'),operate:'LIKE'},
-                        {field: 'orders_from_yw_date', title: __('Orders_from_yw_date'),operate:'LIKE'},
-                        {field: 'yw_number', title: __('Yw_number')},
-                        {field: 'yw_number_remark', title: __('Yw_number_remark')},
-                        {field: 'orders_to_ck_date', title: __('Orders_to_ck_date'),operate:'LIKE'},
-                        {field: 'goods_id', title: __('Goods_id')},
-                        {field: 'update_date', title: __('Update_date'),operate: false},
-                        {field: 'create_date', title: __('Create_date'),operate: false},
-                        {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
+                        {field: 'factory_remark', title: __('Factory_remark'), operate: false},
+                        {field: 'factory_number_remark', title: __('Factory_number_remark'), operate: false},
+                        {field: 'orders_to_yw_date', title: __('Orders_to_yw_date'), operate: false},
+                        {field: 'orders_from_yw_date', title: __('Orders_from_yw_date'), operate: false},
+                        {field: 'yw_number', title: __('Yw_number'), operate: false},
+                        {field: 'yw_number_remark', title: __('Yw_number_remark'), operate: false},
+                        {field: 'orders_to_ck_date', title: __('Orders_to_ck_date'), operate: false},
+                        {
+                            field: 'shop_id', title: __('店铺名称'), operate: false, formatter: function (value, row) {
+                                if (value !== '954647584') {
+                                    return '台湾二店';
+                                } else {
+                                    return '台湾一店';
+                                }
+                            }
+                        },
+                        {field: 'update_date', title: __('Update_date'), operate: false},
+                        {field: 'create_date', title: __('Create_date'), operate: false},
+                        {
+                            field: 'operate',
+                            title: __('Operate'),
+                            table: table,
+                            events: Table.api.events.operate,
+                            formatter: Table.api.formatter.operate
+                        }
                     ]
                 ]
             });
 
             // 为表格绑定事件
             Table.api.bindevent(table);
+            //生效
+            $('.btn-batch-update').on('click', function () {
+                var ids = Table.api.selectedids(table);
+                console.log(ids);
+                Fast.api.open("shop/orderstrack/batch_update", '批量更新', {
+                    callback: function (data) {
+                        $('#table').bootstrapTable('refresh')
+                    }
+                });
+                return false;
+
+            });
         },
         add: function () {
             Controller.api.bindevent();
         },
         edit: function () {
+            Controller.api.bindevent();
+        },
+        batch_update: function () {
             Controller.api.bindevent();
         },
         api: {
