@@ -63,7 +63,11 @@ class SyncNums extends Command
 
     private function getAllOrders()
     {
-        $data = XaqxService::getAllOrders();
+        $url = "/agent-foreign/order/list?_t=1712460524&dgStatus=2&queryType=1&orderBy=0&column=createTime&order=desc&field=id,";
+        $data = XaqxService::getAllOrders($url);
+        $url = "/agent-foreign/order/list?_t=1698238191&agoFlag=0&orderBy=2&column=createTime&order=desc&field=id,&dgStatus=allhandle";
+        $data = XaqxService::getAllOrders($url);
+
     }
 
     private function sendStore()

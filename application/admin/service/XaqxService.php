@@ -169,14 +169,15 @@ class XaqxService
     /**
      * 同步所有订单
      */
-    public static function getAllOrders()
+    public static function getAllOrders($path)
     {
         $page = 1;
         $pageSize = 100;
         $inserts = [];
+        $path .= "&pageNo={$page}&pageSize={$pageSize}";
         while (true){
             $tryNum = 3;
-            $uri = self::$url . "/agent-foreign/order/list?_t=1698238191&agoFlag=0&orderBy=2&column=createTime&order=desc&field=id,&dgStatus=allhandle&pageNo={$page}&pageSize={$pageSize}";
+            $uri = self::$url . $path;
             $header = self::$header;
             echo $uri . PHP_EOL;
             $resArr = [];
