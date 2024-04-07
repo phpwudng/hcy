@@ -35,6 +35,9 @@ class SyncNums extends Command
             case 'all_orders':
                 $this->getAllOrders();
                 break;
+            case 'store_num':
+                $this->sendStore();
+                break;
 
         }
         echo("执行完成");
@@ -61,5 +64,35 @@ class SyncNums extends Command
     private function getAllOrders()
     {
         $data = XaqxService::getAllOrders();
+    }
+
+    private function sendStore()
+    {
+        $arr = [
+            "dd_gzt_cf_yq_45_70",
+            "dd_gzt_cf_yq_45_150",
+            "dd_gzt_cf_yq_45_200",
+            "dd_gzt_cf_yq_50_220",
+            "dd_gzt_cf_blsb_45_70",
+            "dd_gzt_cf_qsdls_d_45_70",
+            "dd_gzt_ys_bsdlby_40_60",
+            "dd_gzt_yanq_by_40_60",
+            "dd_gzt_ys_klb_by_40_60",
+            "dd_gzt_ys_yssh_40_60",
+            "dd_gzt_ys_mmbb_45_70",
+            "dd_gzt_ys_cxmm_45_70",
+            "dd_gzt_ys_cfmm_45_70",
+            "dd_gzt_ys_hfzsnb_45_70",
+            "dd_gzt_ys_hssnb_45_70",
+            "dd_gzt_ys_lxsnb_45_70",
+            "dd_gzt_ys_hpym_45_70",
+            "dd_gzt_ys_dlsmnh_45_70",
+            "dd_gzt_ys_kmlbxh_45_70",
+            "dd_gzt_ys_yyysh_45_70",
+            "dd_gzt_ys_kkm_45_70",
+            "dd_gzt_ys_zmxcy_45_70",
+        ];
+        XaqxService::checkStack($arr);
+
     }
 }
