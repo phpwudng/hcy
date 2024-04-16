@@ -397,6 +397,28 @@ class Backend extends Controller
                     }
                     $where[] = [$k, str_replace('RANGE', 'BETWEEN', $sym) . ' TIME', $arr];
                     break;
+                case 'DATE_RANGE':
+                    $v = str_replace(' - ', ',', $v);
+                    $arr = array_slice(explode(',', $v), 0, 2);
+                    if (stripos($v, ',') === false || !array_filter($arr)) {
+                        continue 2;
+                    }
+                    //当出现一边为空时改变操作符
+                    if ($arr[0] === '') {
+                        $sym = $sym == 'RANGE' ? '<=' : '>';
+                        $arr = $arr[1];
+                    } elseif ($arr[1] === '') {
+                        $sym = $sym == 'RANGE' ? '>=' : '<';
+                        $arr = $arr[0];
+                    }
+                    $tableArr = explode('.', $k);
+                    if (count($tableArr) > 1 && $tableArr[0] != $name && !in_array($tableArr[0], $alias) && !empty($this->model)) {
+                        //修复关联模型下时间无法搜索的BUG
+                        $relation = Loader::parseName($tableArr[0], 1, false);
+                        $alias[$this->model->$relation()->getTable()] = $tableArr[0];
+                    }
+                    $where[] = [$k, str_replace('DATE_RANGE', 'BETWEEN', $sym) . '', $arr];
+                    break;
                 case 'NULL':
                 case 'IS NULL':
                 case 'NOT NULL':

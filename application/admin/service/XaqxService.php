@@ -174,10 +174,10 @@ class XaqxService
         $page = 1;
         $pageSize = 100;
         $inserts = [];
-        $path .= "&pageNo={$page}&pageSize={$pageSize}";
+
         while (true){
             $tryNum = 3;
-            $uri = self::$url . $path;
+            $uri = self::$url . $path . "&pageNo={$page}&pageSize={$pageSize}";
             $header = self::$header;
             echo $uri . PHP_EOL;
             $resArr = [];

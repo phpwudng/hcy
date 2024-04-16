@@ -24,7 +24,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 columns: [
                     [
                         {checkbox: true},
-                        {field: 'orders_id', title: __('Orders_id')},
+                        {field: 'orders_id', title: __('Orders_id'),operate: "LIKE"},
                         {
                             field: 'orders_status',
                             title: __('Orders_status'),
@@ -46,7 +46,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {
                             field: 'orders_pay_date',
                             title: __('Orders_pay_date'),
-                            operate: 'RANGE',
+                            operate: 'DATE_RANGE',
                             addclass: 'datetimerange'
                         },
                         {field: 'orders_ship_date', title: __('Orders_ship_date'), operate: 'LIKE'},
@@ -61,7 +61,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'yw_number_remark', title: __('Yw_number_remark'), operate: false},
                         {field: 'orders_to_ck_date', title: __('Orders_to_ck_date'), operate: false},
                         {
-                            field: 'shop_id', title: __('店铺名称'), operate: false, formatter: function (value, row) {
+                            field: 'shop_id', title: __('店铺名称'),searchList:{"57948505":"台湾二店","954647584":"台湾一店"}, formatter: function (value, row) {
                                 if (value !== '954647584') {
                                     return '台湾二店';
                                 } else {
