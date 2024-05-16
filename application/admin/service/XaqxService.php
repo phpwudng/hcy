@@ -80,6 +80,16 @@ class XaqxService
      */
     public static function getStoreSku()
     {
+        $noSyncSkus = [
+            'dd_gzt_cf_dls_sh_0_0',
+            'dd_gzt_cf_dls_qh_0_0',
+            'dd_gzt_cf_dls_b_0_0',
+            'dd_gzt_cf_jiaz_0_0',
+            'dd_gzt_cf_jjsh_0_0',
+            'dd_gzt_cf_jjqh_0_0',
+            'dd_gzt_cf_kfdymw_0_0',
+            'dd_gzt_cf_jy_qmh_0_0',
+            'dd_gzt_cf_kfdsk_0_0'];
         $page = 1;
         $pageSize = 100;
         $skus = [];
@@ -93,7 +103,7 @@ class XaqxService
 
             if ($resArr['success'] === true && !empty($resArr['result']['page']['records'])){
                 foreach ($resArr['result']['page']['records'] as $item){
-                    if ($item['availableNum'] > 0 && $item['sku']){
+                    if ($item['availableNum'] > 0 && $item['sku'] && !in_array($item['sku'],$noSyncSkus)){
                         $skus[] = $item['sku'];
                     }
                 }
