@@ -110,6 +110,30 @@ CREATE TABLE `user_subscribe` (
 
 CREATE TABLE `orders_track` (
                                 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                                `orders_id` varchat(50) default '' COMMENT '订单号',
+                                `orders_status` varchat(50) default '' COMMENT '订单状态',
+                                `orders_pay_date` timestamp default null COMMENT '订单支付时间',
+                                `orders_ship_date` timestamp default null comment '最晚发货时间',
+                                `orders_to_factory_date` timestamp default null comment '发给工厂时间',
+                                `orders_from_factory_date` timestamp default null comment '工厂发出时间',
+                                `factory_number` varchat(40) default '' COMMENT '工厂物流号',
+                                `factory_remark` varchat(256) default '' COMMENT '工厂备注信息',
+                                `factory_number_remark` varchat(256) default '' COMMENT '工厂物流信息',
+                                `orders_to_yw_date` timestamp default null comment '到达义乌时间',
+                                `orders_from_yw_date` timestamp default null comment '义乌发出时间',
+                                `yw_number` varchat(40) default "" comment '跨境物流订单号',
+                                `yw_number_remark` varchat(256) default '' COMMENT '跨境物流信息',
+                                `orders_to_ck_date` timestamp default null comment '到达仓库时间',
+                                `goods_id` int(10) unsigned NOT NULL default 1 COMMENT '商品ID',
+                                `update_date` timestamp default CURRENT_TIMESTAMP  COMMENT '更新时间',
+                                `create_date` timestamp default CURRENT_TIMESTAMP  COMMENT '创建时间',
+                                PRIMARY KEY (`id`),
+                                UNIQUE orders_id(orders_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单跟进表';
+
+
+CREATE TABLE `orders_track` (
+                                `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
                                 `orders_id` varchar(50) default '' COMMENT '订单号',
                                 `orders_status` varchar(50) default '' COMMENT '订单状态',
                                 `orders_pay_date` varchar(20) default '' COMMENT '订单支付时间',
@@ -130,5 +154,6 @@ CREATE TABLE `orders_track` (
                                 PRIMARY KEY (`id`),
                                 UNIQUE orders_id(orders_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='订单跟进表';
-alter table orders_track add shop_id varchar(64) default "" comment '店铺ID';
+alter table orders_track add message_to_seller varchar(64) default "" comment '卖家备注' after factory_remark;
+alter table orders_track add message_to_user varchar(64) default "" comment '买家备注' after factory_remark;
 

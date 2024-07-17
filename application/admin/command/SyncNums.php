@@ -76,7 +76,7 @@ class SyncNums extends Command
             "dd_gzt_cf_yq_45_70",
 //            "dd_gzt_cf_yq_45_150",
             "dd_gzt_cf_yq_45_200",
-            "dd_gzt_cf_yq_50_220",
+           // "dd_gzt_cf_yq_50_220",
             "dd_gzt_cf_blsb_45_70",
 //            "dd_gzt_cf_qsdls_d_45_70",
             "dd_gzt_ys_bsdlby_40_60",

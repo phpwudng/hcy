@@ -81,6 +81,10 @@ class XaqxService
     public static function getStoreSku()
     {
         $noSyncSkus = [
+            'dd_gzt_cf_jijh_45_200',
+            'dd_gzt_cf_jijh_45_150',
+            'dd_gzt_cf_jijh_45_70',
+            'dd_gzt_cf_prskhl_45_150',
             'dd_gzt_cf_dls_sh_0_0',
             'dd_gzt_cf_dls_qh_0_0',
             'dd_gzt_cf_dls_b_0_0',
@@ -220,6 +224,8 @@ class XaqxService
                         'orders_pay_date'=>$orders['deliveryTime'],
                         'orders_ship_date'=>$orders['shipByDate'],
                         'shop_id'=>$orders['shopId'],
+                        'message_to_seller'=>$orders['messageToSeller'],
+                        'message_to_user'=>$orders['messageToUser'],
                     ];
                     $inserts[] = $temp;
                 }

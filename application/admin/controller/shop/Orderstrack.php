@@ -82,10 +82,23 @@ class Orderstrack extends Backend
             if ($this->request->request('keyField')) {
                 return $this->selectpage();
             }
-            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
+            $otherWhere = [];
+            list($where, $sort, $order, $offset, $limit) = $this->buildparams(null,null,function ($filter) use(&$otherWhere){
+                if(isset($filter['no_to_factory'])){
+                    if ($filter['no_to_factory'] == 1){
+                        $otherWhere = ['orders_to_factory_date'=>"",'orders_status'=>'pending'];
+                    }elseif($filter['no_to_factory'] == 2){
+                        $otherWhere = ['factory_number'=>"",'orders_to_factory_date'=>['neq',""],'orders_status'=>'pending'];
+                    }
+
+                    unset($filter['no_to_factory']);
+                }
+                return $filter;
+            });
 
             $list = $this->model
                 ->where($where)
+                ->where($otherWhere)
                 ->order('orders_id', 'desc')
                 ->paginate($limit);
 

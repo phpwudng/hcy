@@ -254,7 +254,7 @@ class Backend extends Controller
      * @param boolean $relationSearch 是否关联查询
      * @return array
      */
-    protected function buildparams($searchfields = null, $relationSearch = null)
+    protected function buildparams($searchfields = null, $relationSearch = null,$callback_filter=null)
     {
         $searchfields = is_null($searchfields) ? $this->searchFields : $searchfields;
         $relationSearch = is_null($relationSearch) ? $this->relationSearch : $relationSearch;
@@ -274,6 +274,9 @@ class Backend extends Controller
         $filter = (array)json_decode($filter, true);
         $op = (array)json_decode($op, true);
         $filter = $filter ? $filter : [];
+        if (is_callable($callback_filter)) {
+            $filter = $callback_filter($filter);
+        }
         $where = [];
         $alias = [];
         $bind = [];

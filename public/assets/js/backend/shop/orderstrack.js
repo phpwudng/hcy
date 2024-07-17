@@ -44,14 +44,26 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             formatter: Table.api.formatter.status
                         },
                         {
+                            field: 'no_to_factory',
+                            title: __('智能搜索'),
+                            searchList: {
+                                "1": "未整理订单",
+                                "2": "工厂未出货订单",
+                            },
+                            visible:false,
+                        },
+                        {
                             field: 'orders_pay_date',
                             title: __('Orders_pay_date'),
                             operate: 'DATE_RANGE',
                             addclass: 'datetimerange'
                         },
-                        {field: 'orders_ship_date', title: __('Orders_ship_date'), operate: 'LIKE'},
-                        {field: 'orders_to_factory_date', title: __('Orders_to_factory_date'), operate: 'LIKE'},
-                        {field: 'orders_from_factory_date', title: __('Orders_from_factory_date'), operate: 'LIKE'},
+                        {field: 'orders_ship_date', title: __('Orders_ship_date'),  operate: 'RANGE',
+                            addclass: 'datetimerange'},
+                        {field: 'orders_to_factory_date', title: __('Orders_to_factory_date'),  operate: 'RANGE',
+                            addclass: 'datetimerange'},
+                        {field: 'orders_from_factory_date', title: __('Orders_from_factory_date'),   operate: 'RANGE',
+                            addclass: 'datetimerange'},
                         {field: 'factory_number', title: __('Factory_number')},
                         {field: 'factory_remark', title: __('Factory_remark'), operate: false},
                         {field: 'factory_number_remark', title: __('Factory_number_remark'), operate: false},
